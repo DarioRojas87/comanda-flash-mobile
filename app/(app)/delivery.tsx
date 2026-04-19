@@ -13,7 +13,7 @@ import MapView, { Marker, Region } from 'react-native-maps';
 import * as Location from 'expo-location';
 import { supabase } from '@/src/lib/supabase';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAuth } from '@/src/context/AuthContext';
+import { useAuthStore } from '@/src/store/useAuthStore';
 import {
   CheckCircle2,
   MapPin,
@@ -60,7 +60,7 @@ const fetchDeliveryOrders = async (): Promise<DeliveryOrder[]> => {
 // ── Main Screen ───────────────────────────────────────────────────
 
 export default function DeliveryScreen() {
-  const { signOut } = useAuth();
+  const { signOut } = useAuthStore();
   const [activeOrder, setActiveOrder] = useState<DeliveryOrder | null>(null);
   const [failReason, setFailReason] = useState('');
   const [showFailDialog, setShowFailDialog] = useState(false);

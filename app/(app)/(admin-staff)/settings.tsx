@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/src/lib/supabase';
-import { useAuth } from '@/src/context/AuthContext';
+import { useAuthStore } from '@/src/store/useAuthStore';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Settings,
@@ -51,7 +51,7 @@ const EMPTY_FORM = {
 };
 
 export default function SettingsScreen() {
-  const { profile: currentProfile } = useAuth();
+  const { profile: currentProfile } = useAuthStore();
   const queryClient = useQueryClient();
   const router = useRouter();
   const [showForm, setShowForm] = useState(false);

@@ -10,14 +10,14 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Zap, ArrowRight } from 'lucide-react-native';
-import { useAuth } from '@/src/context/AuthContext';
+import { useAuthStore } from '@/src/store/useAuthStore';
 
 export default function LoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn } = useAuthStore();
 
   const handleLogin = async () => {
     if (!email.trim() || !password.trim()) {

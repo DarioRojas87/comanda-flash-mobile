@@ -1,10 +1,10 @@
 import { Tabs, useRouter } from 'expo-router';
 import { TouchableOpacity, View, Text } from 'react-native';
 import { House, ClipboardList, SlidersHorizontal, LogOut } from 'lucide-react-native';
-import { useAuth } from '@/src/context/AuthContext';
+import { useAuthStore } from '@/src/store/useAuthStore';
 
 export default function AdminStaffTabLayout() {
-  const { profile, signOut } = useAuth();
+  const { profile, signOut } = useAuthStore();
   const router = useRouter();
   const isAdmin = profile?.role === 'admin';
 

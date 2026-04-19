@@ -5,7 +5,7 @@ import { Slot, useRouter, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { View, ActivityIndicator, Text } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { AuthProvider, useAuth } from '@/src/context/AuthContext';
+import { useAuthStore } from '@/src/store/useAuthStore';
 
 // Single QueryClient instance for the app lifecycle
 const queryClient = new QueryClient({
@@ -23,9 +23,13 @@ const queryClient = new QueryClient({
  * Redirects unauthenticated users to /login and authenticated users away from /login.
  */
 function AuthNavigationGuard() {
-  const { user, profile, loading } = useAuth();
+  const { user, profile, loading, init } = useAuthStore();
   const segments = useSegments();
   const router = useRouter();
+
+  useEffect(() => {
+    init();
+  }, [init]);
 
   useEffect(() => {
     if (loading) return;
@@ -70,10 +74,8 @@ function AuthNavigationGuard() {
 export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <StatusBar style="light" />
-        <AuthNavigationGuard />
-      </AuthProvider>
+      <StatusBar style="light" />
+      <AuthNavigationGuard />
     </QueryClientProvider>
   );
 }

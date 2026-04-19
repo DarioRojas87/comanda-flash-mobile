@@ -13,7 +13,7 @@ import {
   Switch,
 } from 'react-native';
 import { supabase } from '@/src/lib/supabase';
-import { useAuth } from '@/src/context/AuthContext';
+import { useAuthStore } from '@/src/store/useAuthStore';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateCashClosePDF, generate7DayPDF } from '@/src/utils/pdfGenerator';
@@ -137,7 +137,7 @@ const insertAuditLog = async (
 // ── Main Screen ─────────────────────────────────────────────────
 
 export default function HomeScreen() {
-  const { profile: currentProfile } = useAuth();
+  const { profile: currentProfile } = useAuthStore();
   const [activeTab, setActiveTab] = useState<'map' | 'menu'>('map');
   const queryClient = useQueryClient();
 
