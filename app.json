@@ -1,28 +1,41 @@
 {
   "expo": {
-    "name": "ComandaFlash-Mobile",
+    "name": "ComandaFlash",
     "slug": "ComandaFlash-Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "comandaflashmobile",
-    "userInterfaceStyle": "automatic",
+    "scheme": "comandaflash",
+    "userInterfaceStyle": "dark",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#111418"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "ComandaFlash necesita tu ubicación para rastrear entregas en tiempo real.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "ComandaFlash necesita tu ubicación para rastrear entregas incluso en segundo plano."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#111418"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyALG3MaisJihxZfcVHA3s_nXPewmdRttnQ"
+        }
+      },
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -30,7 +43,14 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "ComandaFlash necesita tu ubicación para rastrear entregas en tiempo real.",
+          "locationWhenInUsePermission": "ComandaFlash necesita tu ubicación para mostrar tu posición en el mapa."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
