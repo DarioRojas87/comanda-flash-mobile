@@ -8,6 +8,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { supabase } from '@/src/lib/supabase';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -146,6 +147,7 @@ function TabButton({
 // ── Main Screen ───────────────────────────────────────────────────
 
 export default function DigitalComanda() {
+  const insets = useSafeAreaInsets();
   const [activeTab, setActiveTab] = useState<TabId>('pending');
   const [assigningOrder, setAssigningOrder] = useState<Order | null>(null);
   const [lastClosedAt, setLastClosedAt] = useState<string | null>(null);
@@ -235,7 +237,10 @@ export default function DigitalComanda() {
   return (
     <View className="flex-1 bg-background-dark">
       {/* Header */}
-      <View className="bg-background-dark px-4 pt-4 pb-3 flex-row items-center justify-between">
+      <View 
+        className="bg-background-dark px-4 pb-3 flex-row items-center justify-between"
+        style={{ paddingTop: Math.max(insets.top, 16) }}
+      >
         <View className="flex-row items-center gap-3">
           <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center">
             <ClipboardList size={20} color="#f97316" />
